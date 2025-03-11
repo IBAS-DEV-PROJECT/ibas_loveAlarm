@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import uvicorn
 
-from algo_temp import calculate_match_with_db, delete_user_from_db
+from algo_temp_day3 import calculate_match_with_db, delete_user_from_db
 
 app = FastAPI()
 
