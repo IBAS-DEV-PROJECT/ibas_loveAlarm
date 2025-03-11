@@ -30,9 +30,14 @@ async def match(request: Request):
 # DB 업데이트 api
 @app.post("/api/update")
 async def update_user(request: Request):
-    answer_data = await request.json()
-    delete_user_from_db(answer_data)
-    return JSONResponse(content={"message": "User deleted successfully!"})
+    data = await request.json()
+    best_match_name = data.get("best_match_name")
+    if best_match_name:
+        success = delete_user_from_db(best_match_name)
+        return JSONResponse(content={"message": "User deleted successfully!" if success else "Deletion failed"})
+    else:
+        return JSONResponse(content={"message": "Invalid request data."}, status_code=400)
+
 
 # backend.py
 # @app.post("/api/update")
