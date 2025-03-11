@@ -20,25 +20,26 @@ app.add_middleware(
 @app.post("/api/match")
 async def match(request: Request):
     user_data = await request.json()
+    print(user_data)
     match_score, match_name, _ = calculate_match_with_db(user_data)
     return JSONResponse(content={
         "best_match": match_name,
         "score": match_score
     })
 
-# DB 업데이트 API
-# @app.post("/api/update")
-# async def update_user(request: Request):
-#     answer_data = await request.json()
-#     delete_user_from_db(answer_data)
-#     return JSONResponse(content={"message": "User deleted successfully!"})
-
-# backend.py
+# DB 업데이트 api
 @app.post("/api/update")
 async def update_user(request: Request):
-    data = await request.json()
-    success = delete_user_from_db(data.get("best_match_name"))
-    return {"success": success}
+    answer_data = await request.json()
+    delete_user_from_db(answer_data)
+    return JSONResponse(content={"message": "User deleted successfully!"})
+
+# backend.py
+# @app.post("/api/update")
+# async def update_user(request: Request):
+#     data = await request.json()
+#     success = delete_user_from_db(data.get("best_match_name"))
+#     return {"success": success}
 
 
 if __name__ == "__main__":
