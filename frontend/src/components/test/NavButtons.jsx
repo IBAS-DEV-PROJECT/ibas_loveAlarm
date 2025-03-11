@@ -50,7 +50,6 @@ const NavButtons = ({ currentIndex, setCurrentIndex, questions, answers }) => {
   };
 
   const handleSubmit = async () => {
-    console.log('최종', answers);
     setLoading(true);
 
     const startTime = Date.now();

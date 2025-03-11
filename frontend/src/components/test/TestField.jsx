@@ -67,8 +67,6 @@ const TestField = ({ question, answer, setAnswer, currentIndex, setCurrentIndex,
     const inputValue = e.target.value;
     const filteredValue = inputValue.replace(/[^a-z0-9!@#$%^&*()_+=\-{}\[\]:;"'<>,.?/|\\`~]/g, '');
     setAnswer(filteredValue);
-
-    console.log(answer);
   };
 
   return (
