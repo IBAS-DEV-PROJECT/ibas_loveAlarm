@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import uvicorn
 
-from algo_temp_day3 import calculate_match_with_db, delete_user_from_db
+from algo_temp_day3 import calculate_match_with_db, delete_user_from_db, insert_user_to_db
 
 app = FastAPI()
 
@@ -16,16 +16,25 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-# 매칭 API
 @app.post("/api/match")
 async def match(request: Request):
     user_data = await request.json()
-    print(user_data)
+    print("입력된 사용자 데이터:", user_data)
+    
+    # 사용자 데이터 DB에 추가 (이미 존재하는 경우에는 False가 반환됨)
+    inserted = insert_user_to_db(user_data)
+    if inserted:
+        print("사용자 추가 성공!")
+    else:
+        print("사용자 추가 실패(이미 존재하거나 오류 발생)")
+    
+    # 매칭 수행
     match_score, match_name, _ = calculate_match_with_db(user_data)
     return JSONResponse(content={
         "best_match": match_name,
         "score": match_score
     })
+
 
 # DB 업데이트 api
 @app.post("/api/update")

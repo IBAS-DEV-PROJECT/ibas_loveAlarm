@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
 # JSON 파일 경로 설정
-file_path = "c:/Users/xorkd/ibas_loveAlarm/ibas_loveAlarm/day3.json"
+file_path = "/Users/haewon/Desktop/new_ibas/backend/cleaned_output_3_converted.json"
 
 def read_json(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -25,7 +25,7 @@ def save_json_data(data):
     # 원본 데이터 읽기 (헤더 보존을 위해)
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
-            original_data = json.load(file)
+            original_data = json.load(f)
             
         # 첫 번째 항목이 헤더인지 확인
         if original_data and isinstance(original_data[0], dict) and "instagram_id" in original_data[0]:

@@ -55,7 +55,7 @@ const NavButtons = ({ currentIndex, setCurrentIndex, questions, answers }) => {
     const startTime = Date.now();
 
     try {
-      const submitResponse = await fetch('http://0.0.0.0:8000/api/match', {
+      const submitResponse = await fetch('http://localhost:8000/api/match', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
